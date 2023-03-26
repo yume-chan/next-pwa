@@ -2,7 +2,10 @@
 
 ## About this fork
 
-This fork fixed an issue that when using PNPM, fallback page (`_offline.tsx`) can't be built because `babel-loader` was not found.
+This fork fixes:
+
+1. When using PNPM, can't build fallback service worker (`_offline.js`) script because `babel-loader` was not found.
+2. When `basePath` is set in `next.config.js`, fallback page path is not correct.
 
 ## Original README
 
