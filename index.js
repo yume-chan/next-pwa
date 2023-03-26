@@ -182,6 +182,7 @@ module.exports =
           let _fallbacks = fallbacks
           if (_fallbacks) {
             const res = buildFallbackWorker({
+              basePath,
               id: buildId,
               fallbacks,
               basedir: options.dir,
