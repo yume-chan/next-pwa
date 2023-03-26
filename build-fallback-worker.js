@@ -91,7 +91,9 @@ const buildFallbackWorker = ({ id, fallbacks, basedir, destdir, minify, pageExte
           test: /\.js$/i,
           use: [
             {
-              loader: 'babel-loader',
+              // When using PNPM, Webpack can't see `babel-loader` because webpack doesn't depend on it.
+              // This package depends on `babel-loader` so it knows where to find it.
+              loader: require.resolve('babel-loader'),
               options: {
                 presets: [
                   [
