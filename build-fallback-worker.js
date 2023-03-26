@@ -6,7 +6,7 @@ const webpack = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 
-const getFallbackEnvs = ({ fallbacks, basedir, id, pageExtensions }) => {
+const getFallbackEnvs = ({ basePath, fallbacks, basedir, id, pageExtensions }) => {
   let { document, data } = fallbacks
 
   if (!document) {
@@ -24,7 +24,7 @@ const getFallbackEnvs = ({ fallbacks, basedir, id, pageExtensions }) => {
       .map(ext => path.join(pagesDir, `_offline.${ext}`))
       .filter(entry => fs.existsSync(entry))
     if (offlines.length === 1) {
-      document = '/_offline'
+      document = basePath + '/_offline'
     }
   }
 
@@ -54,8 +54,8 @@ const getFallbackEnvs = ({ fallbacks, basedir, id, pageExtensions }) => {
   return envs
 }
 
-const buildFallbackWorker = ({ id, fallbacks, basedir, destdir, minify, pageExtensions }) => {
-  const envs = getFallbackEnvs({ fallbacks, basedir, id, pageExtensions })
+const buildFallbackWorker = ({ basePath, id, fallbacks, basedir, destdir, minify, pageExtensions }) => {
+  const envs = getFallbackEnvs({ basePath, fallbacks, basedir, id, pageExtensions })
   if (!envs) return
 
   const name = `fallback-${id}.js`
@@ -130,9 +130,9 @@ const buildFallbackWorker = ({ id, fallbacks, basedir, destdir, minify, pageExte
     ],
     optimization: minify
       ? {
-          minimize: true,
-          minimizer: [new TerserPlugin()]
-        }
+        minimize: true,
+        minimizer: [new TerserPlugin()]
+      }
       : undefined
   }).run((error, status) => {
     if (error || status.hasErrors()) {
