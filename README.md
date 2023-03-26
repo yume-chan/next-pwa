@@ -1,5 +1,11 @@
 # Zero Config [PWA](https://web.dev/learn/pwa/) Plugin for [Next.js](https://nextjs.org/)
 
+## About this fork
+
+This fork fixed an issue that when using PNPM, fallback page (`_offline.tsx`) can't be built because `babel-loader` was not found.
+
+## Original README
+
 This plugin is powered by [workbox](https://developer.chrome.com/docs/workbox/) and other good stuff.
 
 ![size](https://img.shields.io/bundlephobia/minzip/next-pwa.svg) ![dependencies](https://img.shields.io/librariesio/release/npm/next-pwa) ![downloads](https://img.shields.io/npm/dw/next-pwa.svg) ![license](https://img.shields.io/npm/l/next-pwa.svg)
