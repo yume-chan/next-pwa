@@ -24,7 +24,9 @@ const getFallbackEnvs = ({ basePath, fallbacks, basedir, id, pageExtensions }) =
       .map(ext => path.join(pagesDir, `_offline.${ext}`))
       .filter(entry => fs.existsSync(entry))
     if (offlines.length === 1) {
-      document = basePath + '/_offline'
+      // index.js set `basePath` to `/` when it's empty
+      // but we don't need two slashes here
+      document = (basePath === '/' ? '' : basePath) + '/_offline'
     }
   }
 
